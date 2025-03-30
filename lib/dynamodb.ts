@@ -1,4 +1,5 @@
-import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DynamoDB } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocument } from "@aws-sdk/lib-dynamodb";
 
 const awsCredentials = {
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -8,5 +9,20 @@ const awsCredentials = {
 const dynamoConfig = {
   region: process.env.AWS_REGION,
   credentials: awsCredentials,
-} as {};
-export default dynamodbClient;
+} as {
+  credentials: {
+    accessKeyId: string;
+    secretAccessKey: string;
+  };
+  region: string;
+};
+
+const dbClient = DynamoDBDocument.from(new DynamoDB(dynamoConfig), {
+  marshallOptions: {
+    convertEmptyValues: true,
+    removeUndefinedValues: true,
+    convertClassInstanceToMap: false,
+  },
+});
+
+export { dbClient };
