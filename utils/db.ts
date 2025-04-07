@@ -10,6 +10,7 @@ export type IScanCommandOutput<T> = Omit<ScanCommandOutput, "Items"> & {
   Items?: T;
 };
 
+// return all the data
 export async function getAll() {
   const ids = (await dbClient.send(
     new ScanCommand({
@@ -20,6 +21,7 @@ export async function getAll() {
   return ids.Items;
 }
 
+// create new item in DB
 export async function create() {
   await dbClient.send(
     new PutCommand({
