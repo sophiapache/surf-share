@@ -27,7 +27,8 @@ export async function create() {
     new PutCommand({
       TableName: process.env.DATABASE_NAME,
       Item: {
-        id: randomUUID(),
+        rentalId: randomUUID(),
+        name: "Surfboard",
       },
     })
   );
