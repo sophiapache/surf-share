@@ -9,7 +9,7 @@ export class CdkStack extends cdk.Stack {
     new Table(this, "Table", {
       tableName: "rentalsTable",
       partitionKey: {
-        name: "id",
+        name: "rentalId",
         type: AttributeType.STRING,
       },
       removalPolicy: cdk.RemovalPolicy.DESTROY,
